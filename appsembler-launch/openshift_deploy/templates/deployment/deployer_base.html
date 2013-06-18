@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block extra_js %}
+    <script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+    <script src="{% static "js/app.js" %}"></script>
+    <script>
+      apps = {{ apps|safe }};
+    </script>
+{% endblock extra_js %}
+
+
+{% block js_templates %}
+    <!-- Templates -->
+    <script type="text/template" id="project_form_template">
+      <div id="central-widget">
+      <form class="form-deploy" method="post">
+        {% block deployer_form %}
+        {% endblock deployer_form %}
+        <h4>Where can we send the URL?</h4>
+        <div class="control-group">
+          <div class="controls">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-envelope"></i></span>
+              <input type="text" name="email" value="" id="email_input" placeholder="name@domain.com">  
+            </div>
+            
+          </div>
+        </div>
+        <button class="btn btn-success" type="submit">Launch demo site</button>
+      </form>
+      {% block form_extra_text %}{% endblock form_extra_text %}
+      </div> 
+      {% block extra_deployer_content %}{% endblock extra_deployer_content %}
+    </script>
+
+    <script type="text/template" id="deploy_status_template">
+    <div id="central-widget">
+      <div class="form-deploy">
+        <img src="{% static "img/ajax-loader.gif" %}" alt="loader" class="spinner">
+        <h3>Deploying <%= app_name %></h3>
+        <div class="progress progress-striped active">
+          <div class="bar" style="width: 5%;"></div>
+        </div>
+        <div class="alert alert-info" id="info-message-section">
+          <i class="icon-wrench"></i><span id="info-message">Starting deployment...</span>
+        </div>
+      </div>
+    </div>
+    </script>
+{% endblock js_templates %}
