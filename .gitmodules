@@ -1,0 +1,3 @@
+[submodule "appsembler-launch"]
+	path = appsembler-launch
+	url = https://github.com/appsembler/appsembler-launch.git

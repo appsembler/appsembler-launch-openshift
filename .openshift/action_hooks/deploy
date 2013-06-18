@@ -1,0 +1,18 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+source ${OPENSHIFT_PYTHON_DIR}virtenv/bin/activate
+ 
+export PYTHON_EGG_CACHE=${OPENSHIFT_PYTHON_DIR}virtenv/lib/python2.6/site-packages
+ 
+echo "Running syncdb"
+python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py syncdb --noinput --settings=openshift_deploy.settings.production
+
+echo "Running migrations"
+python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py migrate --noinput --settings=openshift_deploy.settings.production
+ 
+echo "Collecting static files"
+python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py collectstatic --noinput -v0 --settings=openshift_deploy.settings.production
+

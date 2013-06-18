@@ -1,0 +1,13 @@
+#!/bin/bash
+# This is a simple post deploy hook executed after your application 
+# is deployed and started.  This script gets executed directly, so 
+# it could be python, php, ruby, etc.
+source ${OPENSHIFT_PYTHON_DIR}virtenv/bin/activate
+ 
+echo "Starting celery worker"
+CELERY_RUNNING=$(ps -ef | grep "celery" | grep -v "grep" | wc -l)
+echo $CELERY_RUNNING
+if [ $CELERY_RUNNING -eq 0 ]
+then
+  python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py celeryd -l info --autoreload --settings=openshift_deploy.settings.production >> $OPENSHIFT_PYTHON_LOG_DIR/celery.log 2>&1 &
+fi

@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import os
+import sys
+
+#sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR']))
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'appsembler-launch'))
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'openshift_deploy.settings.production'
+
+virtenv = os.environ['OPENSHIFT_HOMEDIR'] + 'python/virtenv/'
+os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.6/site-packages')
+
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+try:
+    execfile(virtualenv, dict(__file__=virtualenv))
+except IOError:
+    pass
+
+#
+# IMPORTANT: Put any additional includes below this line.  If placed above this
+# line, it's possible required libraries won't be in your searchable path
+#
+
+# load celery
+import djcelery
+djcelery.setup_loader()
+
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
