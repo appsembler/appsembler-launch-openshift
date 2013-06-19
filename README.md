@@ -6,7 +6,7 @@ The Appsembler launch widget provides a convenient way to quickly deploy open so
 Deploying to OpenShift
 ----------------------
 
-In order to set all the environment variables correctly, you need to copy the file::
+In order to set all the environment variables correctly, you need to copy the file:
 
 ```
 $ cd .openshift/action_hooks
@@ -21,6 +21,29 @@ Then to deploy run these commands:
 $ rhc app create myappsemblerlaunch -t python-2.6 --nogit
 $ git remote add openshift ssh://xxx@myappsemblerlaunch-domain.rhcloud.com/~/git/myappsemblerlaunch.git/
 $ git push openshift master
+```
+
+Get the correct Git remote URL by running this command:
+
+```
+$ rhc app show myappsemblerlaunch
+```
+
+Troubleshooting
+---------------
+
+View the logs with:
+
+```
+$ rhc tail myappsemblerlaunch
+```
+
+You can also SSH into the container and debug with these commands:
+
+```
+$ rhc ssh myappsemblerlaunch
+$ source python/virtenv/bin/activate
+(virtenv)$ gear postreceive --trace
 ```
 
 Migrate existing app
