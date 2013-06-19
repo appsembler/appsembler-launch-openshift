@@ -150,3 +150,4 @@ pip-log.txt
 .DS_Store
 
 /openshift_deploy/openshift.sqlite
+newrelic.ini
