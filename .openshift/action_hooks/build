@@ -10,9 +10,7 @@ fi
  
 ln -sf $OPENSHIFT_DATA_DIR/media $OPENSHIFT_REPO_DIR/wsgi/static/media
 
-if [ ! -e $OPENSHIFT_DATA_DIR/pre_start_python ]; then
-	ln -sf $OPENSHIFT_DATA_DIR/pre_start_python $OPENSHIFT_REPO_DIR/.openshift/action_hooks/pre_start_python
-fi
+ln -sf $OPENSHIFT_DATA_DIR/pre_start_python $OPENSHIFT_REPO_DIR/.openshift/action_hooks/pre_start_python
 
 source ${OPENSHIFT_PYTHON_DIR}virtenv/bin/activate
 ${OPENSHIFT_PYTHON_DIR}virtenv/bin/pip install --use-mirrors -r ${OPENSHIFT_REPO_DIR}appsembler-launch/requirements/production.txt
