@@ -5,6 +5,8 @@
 # ruby, etc.
 source ${OPENSHIFT_PYTHON_DIR}virtenv/bin/activate
  
+source ${OPENSHIFT_DATA_DIR}secret_keys
+
 export PYTHON_EGG_CACHE=${OPENSHIFT_PYTHON_DIR}virtenv/lib/python2.6/site-packages
  
 echo "Running syncdb"
