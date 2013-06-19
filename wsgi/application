@@ -25,10 +25,9 @@ except IOError:
 try:
     import newrelic.agent
 
-    environment = os.environ.get('NEW_RELIC_ENVIRONMENT')
-    config_file = os.path.join(os.environ['OPENSHIFT_DATA_DIR'], os.environ.get('NEW_RELIC_CONFIG_FILE'))
+    config_file = os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'newrelic.ini')
     if os.path.exists(config_file):
-        newrelic.agent.initialize(config_file, environment)
+        newrelic.agent.initialize(config_file)
 
 except IOError:
     pass
