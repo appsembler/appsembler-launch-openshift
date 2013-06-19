@@ -29,6 +29,21 @@ Get the correct Git remote URL by running this command:
 $ rhc app show myappsemblerlaunch
 ```
 
+Setting up New Relic for performance monitoring
+-----------------------------------------------
+
+Sign up for a New Relic account and find your license key. Install the newrelic package in your virtualenv:
+
+```
+$ pip install newrelic
+```
+
+Now run this command to generate a newrelic.ini file:
+
+```
+$ newrelic-admin generate-config <your-license-key> newrelic.ini
+```
+
 Troubleshooting
 ---------------
 
