@@ -5,29 +5,16 @@ The Appsembler launch widget provides a convenient way to quickly deploy open so
 
 Deploying to OpenShift
 ----------------------
+You need a working account for Mandrill, Sentry, Pusher and OpenShift for the app to work. You'll enter the account info in secret_keys file (step 7).
 
-In order to set all the environment variables correctly, you need to copy the file:
-
-```
-$ cd .openshift/action_hooks
-$ cp pre_start_python.tmpl pre_start_python
-```
-
-And then edit this file with all of the correct values for your Mandrill, Redis, Sentry, Pusher and OpenShift accounts. 
-
-Then to deploy run these commands:
-
-```
-$ rhc app create myappsemblerlaunch -t python-2.6 --nogit
-$ git remote add openshift ssh://xxx@myappsemblerlaunch-domain.rhcloud.com/~/git/myappsemblerlaunch.git/
-$ git push openshift master
-```
-
-Get the correct Git remote URL by running this command:
-
-```
-$ rhc app show myappsemblerlaunch
-```
+1. Create a new app: `rhc app create <app_name> python-2.6`
+2. Add a redis cartridge to it: `rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect\?github\=smarterclayton/openshift-redis-cart -a <app_name>`
+3. Go into the repo folder: `cd <app_name>`
+4. Add this repo as upstream: `git remote add upstream https://github.com/appsembler/appsembler-launch-openshift.git`
+5. Get the contents of this repo: `git pull -X theirs upstream master`
+6. Run `rhc app <app_name>`and copy the SSH URL
+7. Edit the secret_keys file in the data/ folder and scp it to the server: `cp data/secret_keys <ssh_url>:app-root/data`
+8. Push the data to the server: `git push`
 
 Setting up New Relic for performance monitoring
 -----------------------------------------------
