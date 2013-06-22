@@ -4,6 +4,8 @@
 # it could be python, php, ruby, etc.
 source ${OPENSHIFT_PYTHON_DIR}virtenv/bin/activate
  
+source ${OPENSHIFT_DATA_DIR}secret_keys
+
 echo "Starting celery worker"
 CELERY_RUNNING=$(ps -ef | grep "celery" | grep -v "grep" | wc -l)
 echo $CELERY_RUNNING
