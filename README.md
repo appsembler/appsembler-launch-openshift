@@ -12,8 +12,8 @@ You need a working account for Mandrill, Sentry, Pusher and OpenShift for the ap
 3. Go into the repo folder: `cd <app_name>`
 4. Add this repo as upstream: `git remote add upstream https://github.com/appsembler/appsembler-launch-openshift.git`
 5. Get the contents of this repo: `git pull -X theirs upstream master`
-6. Run `rhc app <app_name>`and copy the SSH URL
-7. Edit the secret_keys file in the data/ folder and scp it to the server: `cp data/secret_keys <ssh_url>:app-root/data`
+6. Run `rhc app show <app_name>`and copy the SSH URL
+7. Edit the secret_keys file in the data/ folder and scp it to the server: `scp data/secret_keys <ssh_url>:app-root/data`
 8. Push the data to the server: `git push`
 
 Setting up New Relic for performance monitoring
