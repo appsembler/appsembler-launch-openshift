@@ -5,3 +5,4 @@
 # could be python, php, ruby, etc.
 
 pkill -9 -f 'celery' || true
+pkill -9 -f 'flower' || true
