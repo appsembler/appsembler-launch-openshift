@@ -16,4 +16,4 @@ then
 fi
 
 echo "Starting flower"
-python "$OPENSHIFT_REPO_DIR"openshift_deploy/manage.py celery flower --settings=openshift_deploy.settings.production --port=5445 --address=${OPENSHIFT_PYTHON_IP} --broker=redis://:${REDIS_PASSWORD}@${OPENSHIFT_REDIS_DB_HOST}:${OPENSHIFT_REDIS_DB_PORT}/0 >> $OPENSHIFT_PYTHON_LOG_DIR/flower.log 2>&1 &
+python "$OPENSHIFT_REPO_DIR"openshift_deploy/manage.py celery flower --settings=openshift_deploy.settings.production --port=5445 --address=${OPENSHIFT_PYTHON_IP} --broker=redis://:${REDIS_PASSWORD}@${OPENSHIFT_REDIS_HOST}:${OPENSHIFT_REDIS_DB_PORT}/0 >> $OPENSHIFT_PYTHON_LOG_DIR/flower.log 2>&1 &
