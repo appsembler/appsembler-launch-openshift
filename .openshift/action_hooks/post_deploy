@@ -12,7 +12,7 @@ echo $CELERY_RUNNING
 
 if [ $CELERY_RUNNING -eq 0 ]
 then
-    NEW_RELIC_CONFIG_FILE=${OPENSHIFT_DATA_DIR}newrelic.ini newrelic-admin run-python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py celeryd -l info --autoreload --settings=openshift_deploy.settings.production >> $OPENSHIFT_PYTHON_LOG_DIR/celery.log 2>&1 &
+    NEW_RELIC_CONFIG_FILE=${OPENSHIFT_DATA_DIR}newrelic.ini newrelic-admin run-python "$OPENSHIFT_REPO_DIR"appsembler-launch/openshift_deploy/manage.py celeryd -l warning -B --autoscale=6,3 --settings=openshift_deploy.settings.production >> $OPENSHIFT_PYTHON_LOG_DIR/celery.log 2>&1 &
 fi
 
 echo "Starting flower"
