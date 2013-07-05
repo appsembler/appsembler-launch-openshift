@@ -8,12 +8,13 @@ You need a working account for Mandrill, Sentry, Pusher and OpenShift for the ap
 
 1. Create a new app: `rhc app create <app_name> python-2.6`
 2. Add a redis cartridge to it: `rhc add-cartridge http://cartreflect-claytondev.rhcloud.com/reflect\?github\=smarterclayton/openshift-redis-cart -a <app_name>`
-3. Go into the repo folder: `cd <app_name>`
-4. Add this repo as upstream: `git remote add upstream https://github.com/appsembler/appsembler-launch-openshift.git`
-5. Get the contents of this repo: `git pull -X theirs upstream master`
-6. Run `rhc app show <app_name>`and copy the SSH URL
-7. Edit the secret_keys file in the data/ folder and scp it to the server: `scp data/secret_keys <ssh_url>:app-root/data`
-8. Push the data to the server: `git push`
+3. Add the PostgreSQL cartridge: `rhc cartridge add postgresql-8.4 -a <app_name>`
+4. Go into the repo folder: `cd <app_name>`
+5. Add this repo as upstream: `git remote add upstream https://github.com/appsembler/appsembler-launch-openshift.git`
+6. Get the contents of this repo: `git pull -X theirs upstream master`
+7. Run `rhc app show <app_name>`and copy the SSH URL
+8. Edit the secret_keys file in the data/ folder and scp it to the server: `scp data/secret_keys <ssh_url>:app-root/data`
+9. Push the data to the server: `git push`
 
 
 ## Setting up Sentry on Openshift
