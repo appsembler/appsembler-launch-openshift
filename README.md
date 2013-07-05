@@ -3,8 +3,7 @@ Appsembler launch widget quickstart for OpenShift
 
 The Appsembler launch widget provides a convenient way to quickly deploy open source web applications to evaluate them. Currently, there is support for [Redhat's OpenShift PaaS](http://openshift.com).
 
-Deploying to OpenShift
-----------------------
+# Deploying to OpenShift
 You need a working account for Mandrill, Sentry, Pusher and OpenShift for the app to work. You'll enter the account info in secret_keys file (step 7).
 
 1. Create a new app: `rhc app create <app_name> python-2.6`
@@ -15,6 +14,16 @@ You need a working account for Mandrill, Sentry, Pusher and OpenShift for the ap
 6. Run `rhc app show <app_name>`and copy the SSH URL
 7. Edit the secret_keys file in the data/ folder and scp it to the server: `scp data/secret_keys <ssh_url>:app-root/data`
 8. Push the data to the server: `git push`
+
+
+## Setting up Sentry on Openshift
+1. Please use the instructions on [Sentry quickstart](https://github.com/zemanel/openshift-sentry-quickstart) page.
+2. Once you create a new project in Sentry, on the Project Details/Client Security page add rhcloud.com domain to the allowed domains.
+3. From the project API Keys page, copy the full URL and set it as a `SENTRY_DSN` env variable on your Appsembler Launch project - preferably in the secret keys file you set up earlier.
+
+## Running Flower monitoring system
+To access Flower instance running on Appsembler Launch, type the following command in your shell: `rhc port-forward <app_name>` and access Flower through the browser on the address **127.0.0.1:5445**
+
 
 Setting up New Relic for performance monitoring
 -----------------------------------------------
