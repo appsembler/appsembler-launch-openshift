@@ -4,5 +4,6 @@
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
 
-pkill -9 -f 'celery' || true
 pkill -9 -f 'flower' || true
+pkill -9 -f 'celery' || true
+
